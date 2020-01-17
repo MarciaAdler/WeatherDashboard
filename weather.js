@@ -59,14 +59,15 @@ $(document).ready(function(){
             // grab longitude to use in UV index
             var lat = (response.coord.lat);
             var lon = (response.coord.lon);
-            console.log(lat,lon);
+            console.log("search by city ", lat,lon);
             // add date next to name
             
             // add UV Index to card
             getUVIndex(lat,lon);
         })
         function getUVIndex(lat,lon){
-        var queryURL2= "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&appid=4074b5f07760c717f95e1eec3f81ef1f";
+            console.log("getUV", lat, lon)
+            var queryURL2= "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&appid=4074b5f07760c717f95e1eec3f81ef1f";
             $.ajax({
                 url:queryURL2,
                 method: "GET"
@@ -74,10 +75,12 @@ $(document).ready(function(){
                 
                 var uvIndex = $('<span>').addClass('uv-title').text(`UV Index:`) 
                 
-                var uvIndexValue=$('label').addClass('uv-label').text(response[0].value);
+                var uvIndexValue=$('label').addClass('uv-index').text(response[0].value);
+                console.log("uv index", response[0].value)
+                uvIndex.append(uvIndexValue);
+                searchForecast.append(uvIndex);
+                // console.log(response);
 
-                (uvIndex).append(uvIndexValue);
-                (searchForecast).append(uvIndex);
                 
             }) 
         }    
@@ -155,24 +158,27 @@ $(document).ready(function(){
             $('.day-forecasts').append(fiveDayForecast);
             
         })
-           
-        $('.city-list-item').on('click',function(){
-            $('h2').empty();
-            $('.city-forecast').empty();
-            $('.five-day-forecast').empty();
-            $('.five-day').empty();
-            event.preventDefault();
-            console.log('it works');
-            console.log(event.target);
-            console.log($(this).data('value'));
-            var city = $(this).data('value');
-            
-            searchByCity(city);
-            populateFiveDay(city); 
-            city.val('')
-        })  
-              
     }
+
+    $('.city-list-item').on('click',function(){
+        $('h2').empty();
+        $('.city-forecast').empty();
+        $('.five-day-forecast').empty();
+        $('.five-day').empty();
+        event.preventDefault();
+        console.log('it works');
+        console.log(event.target);
+        console.log($(this).data('value'));
+        var city = $(this).data('value');
+        
+        searchByCity(city);
+        populateFiveDay(city); 
+        city.val('')
+    })  
+              
+
+
+
     
     
     // // add event listener to search by city to be able to click on buttons in search history
