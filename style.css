@@ -21,30 +21,43 @@ h2 {
    
     margin-left: 10px;
 }
-.search{
+.city-btn{
     width: 120px;
-    margin-left: 10px;
+    margin-left: 5px;  
 }
 
 form {
-    margin-left: 10px;
+    margin-left: 5px;
+    
+}
+
+.form-control {
+    width: 120px;
+}
+.row {
+    flex-wrap:nowrap;
+}
+.right-column {
+    width: 200px;
 }
 .city-forecast {
     height:300px;
-    width: 100%;
-    
-    overflow: hidden;
-    
+    overflow: hidden; 
+}
+.icon {
+    width: auto;
+    height: 50px;
 }
 .forecast {
     border-style: solid;
     border-color: grey;
     padding: 0;
-    height: 300px;
-    width: 100%;
+    height: 275px;
+    width: 90%;
+    margin: 10px;
 }
 .five-day-forecast {
-  
+    
     display: flex;
     flex-direction: row;
 
