@@ -28,16 +28,17 @@ $(document).ready(function(){
             
     })
     
-    $('.search').on('click'(function(){
-         event.preventDefault();
-        //var city = $(this).attr('data-value');
-        $('h2').empty();
-        $('.city-forecast').empty();
-        $('.five-day').empty();
-        var city = ($(this).location);
-        console.log(event.target);
-        clickCityBtn(city); 
-     })
+    //  $('.search').on('click',function(){
+    //     event.preventDefault();
+    // //      var city = $(this).attr('data-value');
+    // //     $('h2').empty();
+    //      $('.city-forecast').empty();
+    // //     $('.five-day').empty();
+    //     console.log($(this).data('value'));
+    //     var city = $(this).data('value');
+        
+    //      clickCityBtn(city) 
+    //   })
 
     function populateSearchHistory (){
         $('.city-list').empty();
@@ -79,7 +80,7 @@ $(document).ready(function(){
             var lon = (response.coord.lon);
             console.log(lat,lon);
             // add date next to name
-            console.log(city);
+            
             // add UV Index to card
             getUVIndex(lat,lon);
         })
@@ -171,11 +172,13 @@ $(document).ready(function(){
         })
             
     }
+    
+    
     // add event listener to search by city to be able to click on buttons in search history
     function clickCityBtn (city){
         var searchForecast = $('<div>').addClass('forecast');
         $('.city-forecast').append(searchForecast);
-        var queryURL= "api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=4074b5f07760c717f95e1eec3f81ef1f";
+        var queryURL= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=4074b5f07760c717f95e1eec3f81ef1f";
         $.ajax({
             url:queryURL,
             method: "GET"
