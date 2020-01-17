@@ -1,14 +1,5 @@
 $(document).ready(function(){
-    
-    
 
-    // searchForecast.addClass('search-forecast card ');
-    // $('.city-forecast').append(searchForecast);
-
-
-    
-
-    
     $('#search').click(function(){
         event.preventDefault();
         $('h2').empty();
@@ -28,17 +19,7 @@ $(document).ready(function(){
             
     })
     
-    //  $('.search').on('click',function(){
-    //     event.preventDefault();
-    // //      var city = $(this).attr('data-value');
-    // //     $('h2').empty();
-    //      $('.city-forecast').empty();
-    // //     $('.five-day').empty();
-    //     console.log($(this).data('value'));
-    //     var city = $(this).data('value');
-        
-    //      clickCityBtn(city) 
-    //   })
+    
 
     function populateSearchHistory (){
         $('.city-list').empty();
@@ -46,7 +27,7 @@ $(document).ready(function(){
         $.each(cities,function(index,value){
             var newRow = $('<tr>')
             var location = $('<button>');
-            location.addClass('search').attr('date-value',value)
+            location.addClass('city-list-item').attr('data-value',value)
             location.text(value);
             newRow.append(location)
             $('.city-list').append(newRow);
@@ -170,54 +151,70 @@ $(document).ready(function(){
             $('.day-forecasts').append(fiveDayForecast);
             
         })
+           
+        $('.city-list-item').on('click',function(){
+            $('h2').empty();
+            $('.city-forecast').empty();
+            $('.five-day-forecast').empty();
+            $('.five-day').empty();
+            event.preventDefault();
+            console.log('it works');
+            console.log(event.target);
+            console.log($(this).data('value'));
+            var city = $(this).data('value');
             
+            searchByCity(city);
+            populateFiveDay(city); 
+            city.val('')
+        })  
+              
     }
     
     
-    // add event listener to search by city to be able to click on buttons in search history
-    function clickCityBtn (city){
-        var searchForecast = $('<div>').addClass('forecast');
-        $('.city-forecast').append(searchForecast);
-        var queryURL= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=4074b5f07760c717f95e1eec3f81ef1f";
-        $.ajax({
-            url:queryURL,
-            method: "GET"
-        }).then(function(response){
-            console.log(response);
-            var temperature = $('<p>').addClass('attribute').text(`Temperature: ${response.main.temp} ˚F`)
-            var humidity = $('<p>').addClass('attribute').text(`Humidity: ${response.main.humidity}%`);
-            var windSpeed = $('<p>').addClass('attribute').text(`Wind Speed ${response.wind.speed} MPH`);  
-            var name = $('<h2>').addClass('city').text(`${response.name} (${moment().format('M/D/YYYY')})`)
-            var icon = $('<img>').addClass("icon").attr('src','https://openweathermap.org/img/wn/'+response.weather[0].icon+'@2x.png');
-            name.append(icon);
-            searchForecast.append(name);
-            searchForecast.append(temperature);
-            searchForecast.append(humidity);
-            searchForecast.append(windSpeed);
-            //grab latitude to use in UV index
-            // grab longitude to use in UV index
-            var lat = (response.coord.lat);
-            var lon = (response.coord.lon);
-            console.log(lat,lon);
-            // add date next to name
+    // // add event listener to search by city to be able to click on buttons in search history
+    // function clickCityBtn (city){
+    //     var searchForecast = $('<div>').addClass('forecast');
+    //     $('.city-forecast').append(searchForecast);
+    //     var queryURL= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=4074b5f07760c717f95e1eec3f81ef1f";
+    //     $.ajax({
+    //         url:queryURL,
+    //         method: "GET"
+    //     }).then(function(response){
+    //         console.log(response);
+    //         var temperature = $('<p>').addClass('attribute').text(`Temperature: ${response.main.temp} ˚F`)
+    //         var humidity = $('<p>').addClass('attribute').text(`Humidity: ${response.main.humidity}%`);
+    //         var windSpeed = $('<p>').addClass('attribute').text(`Wind Speed ${response.wind.speed} MPH`);  
+    //         var name = $('<h2>').addClass('city').text(`${response.name} (${moment().format('M/D/YYYY')})`)
+    //         var icon = $('<img>').addClass("icon").attr('src','https://openweathermap.org/img/wn/'+response.weather[0].icon+'@2x.png');
+    //         name.append(icon);
+    //         searchForecast.append(name);
+    //         searchForecast.append(temperature);
+    //         searchForecast.append(humidity);
+    //         searchForecast.append(windSpeed);
+    //         //grab latitude to use in UV index
+    //         // grab longitude to use in UV index
+    //         var lat = (response.coord.lat);
+    //         var lon = (response.coord.lon);
+    //         console.log(lat,lon);
+    //         // add date next to name
             
-            // add UV Index to card
-            getUVIndex(lat,lon);
-        })
-        function getUVIndex(lat,lon){
-        var queryURL2= "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&appid=4074b5f07760c717f95e1eec3f81ef1f";
-            $.ajax({
-                url:queryURL2,
-                method: "GET"
-            }).then(function(response){
+    //         // add UV Index to card
+    //         getUVIndex(lat,lon);
+    //     })
+    //     function getUVIndex(lat,lon){
+    //     var queryURL2= "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&appid=4074b5f07760c717f95e1eec3f81ef1f";
+    //         $.ajax({
+    //             url:queryURL2,
+    //             method: "GET"
+    //         }).then(function(response){
                 
-                var uvIndex = $('<p>').addClass('attribute').text(`UV Index ${response[0].value}`);
-                searchForecast.append(uvIndex);
+    //             var uvIndex = $('<p>').addClass('attribute').text(`UV Index ${response[0].value}`);
+    //             searchForecast.append(uvIndex);
                 
-            }) 
-        }    
+    //         }) 
+    //     }    
 
-    }
+    // }
     
 })
    

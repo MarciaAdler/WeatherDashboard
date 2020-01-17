@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .header {
@@ -21,7 +22,7 @@ h2 {
    
     margin-left: 10px;
 }
-.search{
+.city-list-item{
     width: 120px;
     margin-left: 5px;  
 }
