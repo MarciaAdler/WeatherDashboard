@@ -174,7 +174,7 @@ $(document).ready(function(){
         
         searchByCity(city);
         populateFiveDay(city); 
-        city.val('');
+        //city.val();
     })  
 })
    
