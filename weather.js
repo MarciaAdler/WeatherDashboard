@@ -16,6 +16,7 @@ $(document).ready(function(){
         searchByCity(city.val());
         populateFiveDay(city.val())
         $('#input').val('');
+        
             
     })
     
@@ -73,13 +74,13 @@ $(document).ready(function(){
                 method: "GET"
             }).then(function(response){
                 
-                var uvIndex = $('<span>').addClass('uv-title').text(`UV Index:`) 
+                var uvIndex = $('<p>').addClass('uv-title').text(`UV Index:`) 
                 
-                var uvIndexValue=$('label').addClass('uv-index').text(response[0].value);
+                var uvIndexValue = $('<span>').addClass('uv-index').text(response[0].value);
                 console.log("uv index", response[0].value)
                 uvIndex.append(uvIndexValue);
                 searchForecast.append(uvIndex);
-                // console.log(response);
+                console.log(response);
 
                 
             }) 
@@ -173,7 +174,7 @@ $(document).ready(function(){
         
         searchByCity(city);
         populateFiveDay(city); 
-        city.val('')
+        city.val('');
     })  
 })
    
