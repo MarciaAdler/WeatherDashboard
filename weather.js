@@ -72,8 +72,12 @@ $(document).ready(function(){
                 method: "GET"
             }).then(function(response){
                 
-                var uvIndex = $('<p>').addClass('attribute').text(`UV Index ${response[0].value}`);
-                searchForecast.append(uvIndex);
+                var uvIndex = $('<span>').addClass('uv-title').text(`UV Index:`) 
+                
+                var uvIndexValue=$('label').addClass('uv-label').text(response[0].value);
+
+                (uvIndex).append(uvIndexValue);
+                (searchForecast).append(uvIndex);
                 
             }) 
         }    

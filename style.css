@@ -57,6 +57,23 @@ form {
     width: 90%;
     margin: 10px;
 }
+
+.uv-title {
+    margin-left:10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+.uv-label {
+    background-color: red;
+    margin:0;
+    display: inline;
+    border-radius: .2em;
+    padding: 5px;
+    font-size: 20px;
+}
+
+
 .five-day-forecast {
     
     display: flex;
