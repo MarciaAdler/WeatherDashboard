@@ -11,17 +11,15 @@ $(document).ready(function(){
     
     $('#search').click(function(){
         event.preventDefault();
-        
+        $('.city-forecast').empty();
+        $('.five-day').empty();
         var cities = [];
         var city = $('#input');
         if(localStorage.getItem('key')){
             cities = JSON.parse(localStorage.getItem('key'));  
         };
-        
         cities.push(city.val());
         localStorage.setItem('key',JSON.stringify(cities))
-        
-        
         populateSearchHistory(); 
         searchByCity(city.val());
         populateFiveDay(city.val())
@@ -33,18 +31,14 @@ $(document).ready(function(){
     function populateSearchHistory (){
         $('.city-list').empty();
         var cities = JSON.parse(localStorage.getItem('key'));
-        
         $.each(cities,function(index,value){
-            
             var newRow = $('<tr>')
             var location = $('<button>');
-            location.addClass('city-btn').attr('data-value',value)
+            location.addClass('search')
             location.text(value);
             newRow.append(location)
             $('.city-list').append(newRow);
-               
         }) 
-           
     }
     populateSearchHistory()
 
@@ -164,9 +158,8 @@ $(document).ready(function(){
             
         })
             
-    
-    }
     // add event listener to search by city to be able to click on buttons in search history
+        }
     
 })
    
